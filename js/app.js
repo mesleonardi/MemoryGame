@@ -21,7 +21,7 @@ let restart = document.getElementsByClassName('restart')[0];
 let list = document.querySelector('.stars');
 let seconds = 1;
 let minutes = 0;
-let l = document.getElementById("number");
+let counttimer = document.getElementById("number");
 window.setInterval(function(){
     createTime(seconds, minutes);
   
@@ -118,6 +118,23 @@ function isOpenMatch(card, type){
 }
 
 function reset(){
+
+function createCards() {
+    let arrayCards = [];
+    document.querySelector('.moves').innerHTML = moveCount;    
+    let deck = document.querySelector('.deck');
+    let deckChildren = document.querySelector('.deck').getElementsByTagName('li');
+    for (let i = 0; i < deckChildren.length; i++) {
+        arrayCards.push(deckChildren[i]);
+    }
+    let newArrayCards = shuffle(arrayCards);
+    deck.innerHTML = '';
+    for (let i = 0; i < newArrayCards.length; i++) {
+        deck.appendChild(newArrayCards[i]);
+        displayCards(newArrayCards[i]);
+    }
+}
+/*
     let arrayCards = [];
     //reset count
     document.querySelector('.moves').innerHTML = 0;
@@ -129,7 +146,7 @@ function reset(){
     //reset tune
     minutes = 0;
     seconds = 0;
-    l.innerHTML = "00:00";
+    counttimer.innerHTML = "00:00";
     
     //reset cards
     let deck = document.querySelector('.deck');
@@ -146,6 +163,8 @@ function reset(){
     }
 }
 
+
+// final da funcao resert
 function updatemoveCount(){
     //update count
     moveCount += 1;    
@@ -187,7 +206,7 @@ function createTime(secs, min){
     if (secs <10){
         secs = '0'+ secs;    
     }            
-    l.innerHTML = min +":"+ secs;
+    counttimer.innerHTML = min +":"+ secs;
     seconds++;
 }
 
